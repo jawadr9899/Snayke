@@ -1,0 +1,2 @@
+- The 'main.cpp' file utilizes the SFML library
+- It is mandatory to install/include the SFML library to modify/use/run 'main.cpp'
