@@ -5,9 +5,12 @@ This is a simple implementation of the classic Snake game using the SFML library
 ## Includes
 
 ```cpp
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
+#include <string>
+#include <thread>
 #include <vector>
 ```
 
