@@ -1,31 +1,57 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <random>
-#include <vector>
 
-#define WIDTH 630
-#define HEIGHT 630
-#define SNAKE_SPEED 1000.0f
-#define SNAKE_SIZE 15.0f
+#include <SFML/Audio.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Graphics.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <process.h>
+#include <random>
+#include <string>
+#include <thread>
+#include <vector>
 
 using namespace sf;
 
+#define WIDTH 630
+#define HEIGHT 630
+#define FPS 60
+#define SNAKE_SPEED 1000.0f
+#define SNAKE_SIZE 15.0f
+#define SNAKE_COLOR sf::Color::White
+#define SCORE_COLOR sf::Color::White
+#define OVER_COLOR sf::Color::Red
+#define EAT_SOUND "./sounds/_eat.wav"
+#define GAME_OVER_SOUND "./sounds/_over.wav"
+#define FONT_NAME "./fonts/Exo.ttf"
+
 enum Direction { UP, DOWN, LEFT, RIGHT, NoKey };
+const sf::Color colors[] = {sf::Color::Red,   sf::Color::Cyan,
+                            sf::Color::Blue,  sf::Color::Yellow,
+                            sf::Color::Green, sf::Color::Magenta};
+const sf::Color BG_COLOR(0x17, 0x17, 0x17);
+const sf::Color SN_HEAD_COLOR(0x67, 0x67, 0x67);
+
+bool gameOver = false;
 
 struct Snake {
-  std::vector<RectangleShape> segments;
+  std::vector<sf::RectangleShape> segments;
   Direction dir = NoKey;
-  Snake() {
-    RectangleShape head(Vector2f(SNAKE_SIZE, SNAKE_SIZE));
-    head.setFillColor(Color::Red);
-    head.setOrigin(SNAKE_SIZE / 2, SNAKE_SIZE / 2);
+
+  Snake() { segments.push_back(getHead()); }
+
+  sf::RectangleShape getHead() {
+    sf::RectangleShape head(sf::Vector2f(SNAKE_SIZE, SNAKE_SIZE));
+    head.setFillColor(SN_HEAD_COLOR);
     head.setPosition(WIDTH / 2.0, HEIGHT / 2.0);
-    segments.push_back(head);
+    head.setOutlineColor(sf::Color::White);
+    head.setOutlineThickness(1.5);
+    return head;
   }
 
   void grow() {
-    RectangleShape newSegment(Vector2f(SNAKE_SIZE, SNAKE_SIZE));
-    newSegment.setFillColor(Color::Green);
+    sf::RectangleShape newSegment(sf::Vector2f(SNAKE_SIZE, SNAKE_SIZE));
+    newSegment.setFillColor(SNAKE_COLOR);
     newSegment.setPosition(segments.back().getPosition());
     segments.push_back(newSegment);
   }
@@ -61,7 +87,25 @@ struct Snake {
     }
     dir = newDir;
   }
+  void reset() {
+    segments.clear();
+    segments.push_back(getHead());
+  }
 };
+void playSound(std::string &name) {
+  std::thread([name]() {
+    sf::SoundBuffer buffer;
+    if (!buffer.loadFromFile(name)) {
+      std::cerr << "Error: Could not load " << name << std::endl;
+      return;
+    }
+    sf::Sound sound;
+    sound.setBuffer(buffer);
+    sound.play();
+
+    sf::sleep(buffer.getDuration());
+  }).detach();
+}
 
 int getRandInt(int min, int max) {
   std::random_device rd;
@@ -69,12 +113,12 @@ int getRandInt(int min, int max) {
   std::uniform_int_distribution<> dis(min, max);
   return dis(gen);
 }
-CircleShape spawnFood(const Text &scoreText) {
-  CircleShape food(10);
-  food.setFillColor(Color::Red);
-
-
-  FloatRect scoreBounds = scoreText.getGlobalBounds();
+sf::CircleShape spawnFood(const sf::Text &scoreText) {
+  sf::CircleShape food(10);
+  food.setFillColor(colors[getRandInt(0, 5)]);
+  food.setOutlineColor(sf::Color::White);
+  food.setOutlineThickness(1);
+  sf::FloatRect scoreBounds = scoreText.getGlobalBounds();
 
   float padding = 50.0f;
 
@@ -84,7 +128,7 @@ CircleShape spawnFood(const Text &scoreText) {
   while (!validPosition) {
     x = getRandInt(0, WIDTH - 20);
     y = getRandInt(0, HEIGHT - 20);
-    FloatRect foodBounds(x, y, food.getRadius() * 2, food.getRadius() * 2);
+    sf::FloatRect foodBounds(x, y, food.getRadius() * 2, food.getRadius() * 2);
 
     if (foodBounds.left + foodBounds.width + padding < scoreBounds.left ||
         foodBounds.left > scoreBounds.left + scoreBounds.width + padding ||
@@ -111,104 +155,149 @@ Direction handleMovement() {
   return NoKey;
 }
 
-void checkForOutOfBounds(Snake &snake, RenderWindow &window,
+void checkForOutOfBounds(Snake &snake, sf::RenderWindow &window,
                          Text &gameOverText) {
-    FloatRect windowBounds(0, 0, WIDTH, HEIGHT);
-
-    FloatRect headBounds = snake.segments[0].getGlobalBounds();
+  sf::FloatRect windowBounds(0, 0, WIDTH, HEIGHT);
+  sf::FloatRect headBounds = snake.segments[0].getGlobalBounds();
   headBounds.left = snake.segments[0].getPosition().x - headBounds.width / 2;
   headBounds.top = snake.segments[0].getPosition().y - headBounds.height / 2;
 
-    if (headBounds.left < windowBounds.left ||
-      headBounds.top < windowBounds.top ||
-      headBounds.left + headBounds.width >
-          windowBounds.left + windowBounds.width ||
-      headBounds.top + headBounds.height >
-          windowBounds.top + windowBounds.height) {
+  if (!gameOver && (headBounds.left < windowBounds.left ||
+                    headBounds.top < windowBounds.top ||
+                    headBounds.left + headBounds.width >
+                        windowBounds.left + windowBounds.width ||
+                    headBounds.top + headBounds.height >
+                        windowBounds.top + windowBounds.height)) {
+    std::string file = GAME_OVER_SOUND;
+    playSound(file);
     window.draw(gameOverText);
+    gameOver = true;
     window.display();
-    sf::sleep(sf::seconds(3));
-    window.close();
   }
 }
 
-void checkForCollision(Snake &snake, CircleShape &food, Text &txt,
-                       RenderWindow &window, Text &gameOverText) {
-    if (snake.segments[0].getGlobalBounds().intersects(food.getGlobalBounds())) {
+bool isColliding(const sf::RectangleShape &head,
+                 const sf::RectangleShape &segment) {
+  sf::Vector2f headPos = head.getPosition();
+  sf::Vector2f segmentPos = segment.getPosition();
+  sf::Vector2f headSize = head.getSize();
+  sf::Vector2f segmentSize = segment.getSize();
+
+  return headPos.x < segmentPos.x + segmentSize.x &&
+         headPos.x + headSize.x > segmentPos.x &&
+         headPos.y < segmentPos.y + segmentSize.y &&
+         headPos.y + headSize.y > segmentPos.y;
+}
+void checkForCollision(Snake &snake, sf::CircleShape &food, sf::Text &txt,
+                       sf::RenderWindow &window, sf::Text &gameOverText) {
+  std::string file = EAT_SOUND;
+  if (snake.segments[0].getGlobalBounds().intersects(food.getGlobalBounds())) {
     snake.grow();
-        food = spawnFood(txt);
+    food = spawnFood(txt);
+    playSound(file);
     txt.setString("Score: " + std::to_string(snake.segments.size() - 1));
   }
 
-    if (snake.segments[0].getGlobalBounds().intersects(txt.getGlobalBounds())) {
+  if (!gameOver &&
+      snake.segments[0].getGlobalBounds().intersects(txt.getGlobalBounds())) {
+    file = GAME_OVER_SOUND;
+    playSound(file);
     window.draw(gameOverText);
+    gameOver = true;
     window.display();
-    sf::sleep(sf::seconds(3));
-    window.close();
+  }
+
+  if (!gameOver && snake.segments.size() >= 5) {
+    auto head = snake.segments[0];
+    for (size_t i = 1; i < snake.segments.size(); i++) {
+      if (isColliding(head, snake.segments[i])) {
+        file = GAME_OVER_SOUND;
+        playSound(file);
+        window.draw(gameOverText);
+        gameOver = true;
+        window.display();
+        break;
+      }
+    }
   }
 }
 
 int main() {
-  RenderWindow window(VideoMode(WIDTH, HEIGHT), "Snake");
+  sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Snake-For-Class",
+                          sf::Style::Titlebar | sf::Style::Close);
 
-  Font font;
-  if (!font.loadFromFile("./Matemasie/Matemasie-Regular.ttf"))
+  sf::Font font;
+  if (!font.loadFromFile(FONT_NAME))
     exit(0);
 
-  Text txt;
+  sf::Text txt;
   txt.setFont(font);
   txt.setString("Score: 0");
-  txt.setCharacterSize(45);
-  txt.setFillColor(Color::Green);
-  txt.setPosition(WIDTH / 2.0 - txt.getGlobalBounds().width / 2, 0);
+  txt.setCharacterSize(30);
+  txt.setFillColor(SCORE_COLOR);
+  txt.setPosition(WIDTH / 2.0 - txt.getGlobalBounds().width / 2, 10);
 
   Snake snake;
-  CircleShape food = spawnFood(txt);
+  sf::CircleShape food = spawnFood(txt);
 
-  Text gameOverText;
+  sf::Text gameOverText;
   gameOverText.setFont(font);
   gameOverText.setString("Game Over");
   gameOverText.setCharacterSize(60);
-  gameOverText.setFillColor(Color::Red);
+  gameOverText.setFillColor(OVER_COLOR);
   gameOverText.setPosition(
       WIDTH / 2.0 - gameOverText.getGlobalBounds().width / 2,
       HEIGHT / 2.0 - gameOverText.getGlobalBounds().height / 2);
 
-  Clock clock;
+  sf::Clock clock;
   float snakeMovementInterval = 0.1f;
-  float snakeMovementTimer = 0.0f;
+  float snakeMovementTimer = 0.1f;
 
-  window.setFramerateLimit(60);
+  window.setFramerateLimit(FPS);
 
   while (window.isOpen()) {
-    Event event;
+    sf::Event event;
     while (window.pollEvent(event)) {
-      if (event.type == Event::Closed)
+
+      if (event.type == sf::Event::Closed)
         window.close();
     }
 
-    Direction m = handleMovement();
-    if (m != NoKey) {
-      snake.setDirection(m);
+    if (gameOver && sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+      window.clear(BG_COLOR);
+      snake.reset();
+      food = spawnFood(txt);
+      txt.setString("Score: 0");
+      gameOver = false;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      window.close();
+      exit(0);
     }
 
-    float deltaTime = clock.restart().asSeconds();
-    snakeMovementTimer += deltaTime;
+    if (!gameOver) {
+      Direction m = handleMovement();
+      if (m != NoKey) {
+        snake.setDirection(m);
+      }
 
-    if (snakeMovementTimer >= snakeMovementInterval) {
-      snakeMovementTimer = 0.0f;
-      snake.move(deltaTime);
+      float deltaTime = clock.restart().asSeconds();
+      snakeMovementTimer += deltaTime;
+
+      if (snakeMovementTimer >= snakeMovementInterval) {
+        snakeMovementTimer = 0.0f;
+        snake.move(deltaTime);
+      }
+      checkForOutOfBounds(snake, window, gameOverText);
+      checkForCollision(snake, food, txt, window, gameOverText);
+
+      window.clear(BG_COLOR);
+      for (const auto &segment : snake.segments) {
+        window.draw(segment);
+      }
+      window.draw(food);
+      window.draw(txt);
     }
-
-    checkForOutOfBounds(snake, window, gameOverText);
-    checkForCollision(snake, food, txt, window, gameOverText);
-
-    window.clear();
-    for (const auto &segment : snake.segments) {
-      window.draw(segment);
-    }
-    window.draw(food);
-    window.draw(txt);
     window.display();
   }
 
