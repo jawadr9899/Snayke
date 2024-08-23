@@ -1,11 +1,6 @@
-
 #include <SFML/Audio.hpp>
-#include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Graphics.hpp>
-#include <cstdlib>
 #include <iostream>
-#include <process.h>
 #include <random>
 #include <string>
 #include <thread>
