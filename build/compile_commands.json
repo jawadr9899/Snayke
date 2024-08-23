@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Jawad/Desktop/New folder/Snake/build",
+  "command": "C:/msys64/mingw64/bin/clang++.exe   -g -std=gnu++17 -o CMakeFiles/Snake-For-Class.dir/main.cpp.obj -c \"C:/Users/Jawad/Desktop/New folder/Snake/main.cpp\"",
+  "file": "C:/Users/Jawad/Desktop/New folder/Snake/main.cpp",
+  "output": "CMakeFiles/Snake-For-Class.dir/main.cpp.obj"
+}
+]
