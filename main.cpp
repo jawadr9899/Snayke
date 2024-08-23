@@ -16,9 +16,9 @@ using namespace sf;
 #define SNAKE_COLOR sf::Color::White
 #define SCORE_COLOR sf::Color::White
 #define OVER_COLOR sf::Color::Red
-#define EAT_SOUND "./sounds/_eat.wav"
-#define GAME_OVER_SOUND "./sounds/_over.wav"
-#define FONT_NAME "./fonts/Exo.ttf"
+#define EAT_SOUND "./lib/sounds/_eat.wav"
+#define GAME_OVER_SOUND "./lib/sounds/_over.wav"
+#define FONT_NAME "./lib/fonts/Exo.ttf"
 
 enum Direction { UP, DOWN, LEFT, RIGHT, NoKey };
 const sf::Color colors[] = {sf::Color::Red,   sf::Color::Cyan,
