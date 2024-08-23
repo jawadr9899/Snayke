@@ -15,3 +15,11 @@ target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio sfml-network sfml
 
 # Copy resource folders
 file(COPY ${CMAKE_SOURCE_DIR}/lib DESTINATION ${CMAKE_BINARY_DIR})
+
+# Copy SFML DLLs to build directory
+file(COPY "C:/msys64/mingw64/bin/libsfml-graphics-2.dll"
+     "C:/msys64/mingw64/bin/libsfml-audio-2.dll"
+     "C:/msys64/mingw64/bin/libsfml-network-2.dll"
+     "C:/msys64/mingw64/bin/libsfml-system-2.dll"
+     "C:/msys64/mingw64/bin/libsfml-window-2.dll"
+     DESTINATION ${CMAKE_BINARY_DIR})
