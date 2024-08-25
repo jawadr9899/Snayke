@@ -1,0 +1,2 @@
+C:/msys64/mingw64/bin/llvm-ar.exe qc libSnayke_lib.a CMakeFiles/Snayke_lib.dir/src/helpers.cpp.obj CMakeFiles/Snayke_lib.dir/src/main.cpp.obj CMakeFiles/Snayke_lib.dir/src/snake.cpp.obj
+C:/msys64/mingw64/bin/llvm-ranlib.exe libSnayke_lib.a

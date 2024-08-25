@@ -1,2 +1,2 @@
-clang++ -std=c++17 -O3 -ffunction-sections -fdata-sections -fvisibility=hidden "-Wl,--gc-sections" -mwindows -s -DSFML_STATIC main.cpp -o snake.exe -static-libgcc -static-libstdc++ -L/mingw64/include -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio 
-# clang++ -std=c++17 -O3 -ffunction-sections -fdata-sections -fvisibility=hidden "-Wl,--gc-sections" -s -DSFML_STATIC main.cpp -o snake.exe -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+# clang++ -std=c++17 -O3 -ffunction-sections -fdata-sections -fvisibility=hidden "-Wl,--gc-sections" -mwindows -s -DSFML_STATIC main.cpp -o snake.exe  -L/mingw64/include -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio 
+clang++ src/*.cpp -I src/include/ -std=c++17 -O3 -ffunction-sections -fdata-sections -fvisibility=hidden "-Wl,--gc-sections" -s -DSFML_STATIC  -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio  -o snake

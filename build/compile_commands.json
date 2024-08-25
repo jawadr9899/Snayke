@@ -1,8 +1,26 @@
 [
 {
-  "directory": "C:/Users/Jawad/Desktop/New folder/Snake/build",
-  "command": "C:/msys64/mingw64/bin/clang++.exe   -g -std=gnu++17 -o CMakeFiles/Snake-For-Class.dir/main.cpp.obj -c \"C:/Users/Jawad/Desktop/New folder/Snake/main.cpp\"",
-  "file": "C:/Users/Jawad/Desktop/New folder/Snake/main.cpp",
-  "output": "CMakeFiles/Snake-For-Class.dir/main.cpp.obj"
+  "directory": "C:/Users/Jawad/Desktop/C++-Snake/Snake/build",
+  "command": "C:/msys64/mingw64/bin/clang++.exe  @CMakeFiles/Snayke_lib.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles/Snayke_lib.dir/src/helpers.cpp.obj -c C:/Users/Jawad/Desktop/C++-Snake/Snake/src/helpers.cpp",
+  "file": "C:/Users/Jawad/Desktop/C++-Snake/Snake/src/helpers.cpp",
+  "output": "CMakeFiles/Snayke_lib.dir/src/helpers.cpp.obj"
+},
+{
+  "directory": "C:/Users/Jawad/Desktop/C++-Snake/Snake/build",
+  "command": "C:/msys64/mingw64/bin/clang++.exe  @CMakeFiles/Snayke_lib.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles/Snayke_lib.dir/src/main.cpp.obj -c C:/Users/Jawad/Desktop/C++-Snake/Snake/src/main.cpp",
+  "file": "C:/Users/Jawad/Desktop/C++-Snake/Snake/src/main.cpp",
+  "output": "CMakeFiles/Snayke_lib.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Jawad/Desktop/C++-Snake/Snake/build",
+  "command": "C:/msys64/mingw64/bin/clang++.exe  @CMakeFiles/Snayke_lib.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles/Snayke_lib.dir/src/snake.cpp.obj -c C:/Users/Jawad/Desktop/C++-Snake/Snake/src/snake.cpp",
+  "file": "C:/Users/Jawad/Desktop/C++-Snake/Snake/src/snake.cpp",
+  "output": "CMakeFiles/Snayke_lib.dir/src/snake.cpp.obj"
+},
+{
+  "directory": "C:/Users/Jawad/Desktop/C++-Snake/Snake/build",
+  "command": "C:/msys64/mingw64/bin/clang++.exe -DFONTS_DIR=\\\"C:/Users/Jawad/Desktop/C++-Snake/Snake/build/resources/fonts\\\" -DIMAGES_DIR=\\\"C:/Users/Jawad/Desktop/C++-Snake/Snake/build/resources/images\\\" -DSOUNDS_DIR=\\\"C:/Users/Jawad/Desktop/C++-Snake/Snake/build/resources/sounds\\\" @CMakeFiles/Snayke.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles/Snayke.dir/src/main.cpp.obj -c C:/Users/Jawad/Desktop/C++-Snake/Snake/src/main.cpp",
+  "file": "C:/Users/Jawad/Desktop/C++-Snake/Snake/src/main.cpp",
+  "output": "CMakeFiles/Snayke.dir/src/main.cpp.obj"
 }
 ]

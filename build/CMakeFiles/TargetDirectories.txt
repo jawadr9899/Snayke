@@ -1,3 +1,4 @@
-C:/Users/Jawad/Desktop/New folder/Snake/build/CMakeFiles/Snake-For-Class.dir
-C:/Users/Jawad/Desktop/New folder/Snake/build/CMakeFiles/edit_cache.dir
-C:/Users/Jawad/Desktop/New folder/Snake/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles/Snayke_lib.dir
+C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles/Snayke.dir
+C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles/edit_cache.dir
+C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles/rebuild_cache.dir

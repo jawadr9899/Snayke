@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Jawad/Desktop/New folder/Snake
+# Install script for directory: C:/Users/Jawad/Desktop/C++-Snake/Snake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/YourProjectName")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Snayke")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/Jawad/Desktop/New folder/Snake/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/Jawad/Desktop/C++-Snake/Snake/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

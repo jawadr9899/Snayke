@@ -1,6 +1,14 @@
 # Snake Game in C++
 
-This is a simple implementation of the classic Snake game using the SFML library in C++.
+This is a simple implementation of the classic Snake game using the SFML library in C++. In this game, you control a snake using arrow keys, eat food to increase your score, and avoid boundaries and self-collisions to prevent game over.
+
+![A Screenshot of Game](shot.png)
+
+## Features
+
+- **Eat Food**: The snake grows and your score increases when the snake eats food.
+- **Game Over**: The game ends if the snake goes out of bounds or crashes into itself.
+- **Controls**: Use the arrow keys to navigate the snake.
 
 ## Includes
 
@@ -14,6 +22,6 @@ This is a simple implementation of the classic Snake game using the SFML library
 #include <vector>
 ```
 
-## For Windows
+## Build(Windows)
 
-Use the 'out/snake.exe' for windows
+- Checkout build folder

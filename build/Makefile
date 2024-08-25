@@ -57,10 +57,10 @@ RM = "C:/Program Files/CMake/bin/cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:/Users/Jawad/Desktop/New folder/Snake"
+CMAKE_SOURCE_DIR = C:/Users/Jawad/Desktop/C++-Snake/Snake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:/Users/Jawad/Desktop/New folder/Snake/build"
+CMAKE_BINARY_DIR = C:/Users/Jawad/Desktop/C++-Snake/Snake/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:/Users/Jawad/Desktop/New folder/Snake/build/CMakeFiles" "C:/Users/Jawad/Desktop/New folder/Snake/build//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles C:/Users/Jawad/Desktop/C++-Snake/Snake/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:/Users/Jawad/Desktop/New folder/Snake/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:/Users/Jawad/Desktop/C++-Snake/Snake/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,41 +117,105 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Snake-For-Class
+# Target rules for targets named Snayke_lib
 
 # Build rule for target.
-Snake-For-Class: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Snake-For-Class
-.PHONY : Snake-For-Class
+Snayke_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Snayke_lib
+.PHONY : Snayke_lib
 
 # fast build rule for target.
-Snake-For-Class/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snake-For-Class.dir/build.make CMakeFiles/Snake-For-Class.dir/build
-.PHONY : Snake-For-Class/fast
+Snayke_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/build
+.PHONY : Snayke_lib/fast
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+#=============================================================================
+# Target rules for targets named Snayke
+
+# Build rule for target.
+Snayke: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Snayke
+.PHONY : Snayke
+
+# fast build rule for target.
+Snayke/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke.dir/build.make CMakeFiles/Snayke.dir/build
+.PHONY : Snayke/fast
+
+src/helpers.obj: src/helpers.cpp.obj
+.PHONY : src/helpers.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snake-For-Class.dir/build.make CMakeFiles/Snake-For-Class.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+src/helpers.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/helpers.cpp.obj
+.PHONY : src/helpers.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/helpers.i: src/helpers.cpp.i
+.PHONY : src/helpers.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snake-For-Class.dir/build.make CMakeFiles/Snake-For-Class.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/helpers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/helpers.cpp.i
+.PHONY : src/helpers.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/helpers.s: src/helpers.cpp.s
+.PHONY : src/helpers.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snake-For-Class.dir/build.make CMakeFiles/Snake-For-Class.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/helpers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/helpers.cpp.s
+.PHONY : src/helpers.cpp.s
+
+src/main.obj: src/main.cpp.obj
+.PHONY : src/main.obj
+
+# target to build an object file
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke.dir/build.make CMakeFiles/Snayke.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke.dir/build.make CMakeFiles/Snayke.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke.dir/build.make CMakeFiles/Snayke.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/snake.obj: src/snake.cpp.obj
+.PHONY : src/snake.obj
+
+# target to build an object file
+src/snake.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/snake.cpp.obj
+.PHONY : src/snake.cpp.obj
+
+src/snake.i: src/snake.cpp.i
+.PHONY : src/snake.i
+
+# target to preprocess a source file
+src/snake.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/snake.cpp.i
+.PHONY : src/snake.cpp.i
+
+src/snake.s: src/snake.cpp.s
+.PHONY : src/snake.s
+
+# target to generate assembly for a file
+src/snake.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Snayke_lib.dir/build.make CMakeFiles/Snayke_lib.dir/src/snake.cpp.s
+.PHONY : src/snake.cpp.s
 
 # Help Target
 help:
@@ -161,10 +225,17 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Snake-For-Class"
-	@echo "... main.obj"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... Snayke"
+	@echo "... Snayke_lib"
+	@echo "... src/helpers.obj"
+	@echo "... src/helpers.i"
+	@echo "... src/helpers.s"
+	@echo "... src/main.obj"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/snake.obj"
+	@echo "... src/snake.i"
+	@echo "... src/snake.s"
 .PHONY : help
 
 
