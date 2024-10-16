@@ -1,6 +1,6 @@
 # Snayke - C++
 
-This is a simple implementation of the classic Snake game using the SFML library in C++. In this game, you control a snake using arrow keys, eat food to increase your score, and avoid boundaries and self-collisions to prevent game over.
+This is a simple (unoptimized) implementation of the classic Snake game using the SFML library in C++. In this game, you control a snake using arrow keys, eat food to increase your score, and avoid boundaries and self-collisions to prevent game over.
 
 ![A Screenshot of Game](shot.png)
 
@@ -22,6 +22,7 @@ This is a simple implementation of the classic Snake game using the SFML library
 #include <vector>
 ```
 
-## Build(Windows)
+## Build
 
-- Checkout build folder
+- You have to build the binary on your own through source code
+- Just clone it and use CMake or any other build tool to build the binary
